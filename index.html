@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="無界塾六年級 Google 協作網站。依 D、B、G 班查看學生發布的網站。" />
+  <title>無界塾六年級 Google 協作網站</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#works">跳到學生網站</a>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="#top">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">
+          <span class="brand__kicker">無界塾</span>
+          <span class="brand__name">六年級協作網站</span>
+        </span>
+      </a>
+      <a class="topbar__jump" href="#works">看學生網站</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="hero__eyebrow">資訊 · 發布 · 表達</p>
+      <h1 id="page-title" class="hero__title">無界塾六年級 Google 協作網站</h1>
+      <p class="hero__lede">
+        這學期六年級學生學習用 Google 協作平台做出自己的網站：選定主題、安排頁面與導覽，寫給特定讀者，再發布成一個真正可以打開的網址。這裡依 D、B、G 班收錄每位學生的網站。
+      </p>
+    </section>
+
+    <section class="philosophy" aria-labelledby="philosophy-heading">
+      <div class="philosophy__inner">
+        <p class="section-kicker">課程設計理念</p>
+        <h2 id="philosophy-heading" class="philosophy__title">為什麼做一個網站？</h2>
+        <p class="philosophy__lede">
+          做網站不是把文字貼上頁面就結束。學生要決定讀者是誰、資訊怎麼分頁、第一眼看到什麼，以及這個網址公開之後別人如何閱讀。
+        </p>
+
+        <ul class="pillars">
+          <li class="pillar">
+            <span class="pillar__num">01</span>
+            <h3>頁面與導覽</h3>
+            <p>規劃首頁與分頁，讓選單說得清楚：人進來之後，知道下一頁該去哪裡。</p>
+          </li>
+          <li class="pillar">
+            <span class="pillar__num">02</span>
+            <h3>內容與讀者</h3>
+            <p>先想「寫給誰看」，再決定標題、段落與圖片。網站是給讀者用的，不只是交作業的檔案。</p>
+          </li>
+          <li class="pillar">
+            <span class="pillar__num">03</span>
+            <h3>發布與分享</h3>
+            <p>把網站發布成公開連結。知道網址的人可以直接打開，作品才算真正放上網路。</p>
+          </li>
+        </ul>
+
+        <details class="philosophy__more">
+          <summary>
+            <span class="philosophy__more-closed">閱讀完整課程理念</span>
+            <span class="philosophy__more-open">收合完整理念</span>
+          </summary>
+          <div class="philosophy__prose">
+            <p>
+              Google 協作平台讓學生在沒有寫程式的情況下，完成一件完整的網路作品：有標題、有分頁、有可以轉貼的網址。這門課把「發布」當成學習的終點，而不是停在草稿。
+            </p>
+            <p>
+              過程中學生練習結構思考。一個網站如果只有一長頁文字，讀者會迷路；如果每頁各說各的，主題會散掉。他們要為同一個讀者把資訊排好順序。
+            </p>
+            <p>
+              這份名錄給教師核對繳交狀況，也給家長從班級找到孩子的名字，直接打開他們的網站。連結請設成知道網址的任何人都可以檢視，否則會看到登入畫面。
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="works" class="works" aria-labelledby="works-heading">
+      <div class="works__header">
+        <p class="section-kicker">學生網站</p>
+        <h2 id="works-heading">依班級查看 Google 網站</h2>
+        <p class="works__hint">點學生姓名可在本頁預覽；若畫面空白或要求登入，請改開原始網址。尚未填上連結的學生會標成「尚未提供」。</p>
+      </div>
+
+      <div class="filter-bar" id="filter-bar">
+        <nav class="class-tabs" role="tablist" aria-label="班級篩選">
+          <button type="button" class="class-tab is-active" role="tab" aria-selected="true" data-class="all">全部</button>
+          <button type="button" class="class-tab" role="tab" aria-selected="false" data-class="D">D 班</button>
+          <button type="button" class="class-tab" role="tab" aria-selected="false" data-class="B">B 班</button>
+          <button type="button" class="class-tab" role="tab" aria-selected="false" data-class="G">G 班</button>
+        </nav>
+        <label class="search">
+          <span class="visually-hidden">搜尋學生姓名</span>
+          <input id="search-input" type="search" placeholder="輸入孩子的姓名" autocomplete="off" />
+        </label>
+      </div>
+
+      <p class="works__count" id="works-count" aria-live="polite"></p>
+      <div id="student-grid" class="student-grid" aria-label="學生網站列表"></div>
+      <p id="empty-state" class="empty-state" hidden>找不到符合的學生，請改班級或再試一次姓名。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>無界塾六年級 · Google 協作網站 · 教育展示用</p>
+  </footer>
+
+  <div class="modal" id="preview-modal" hidden>
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal__header">
+        <div>
+          <p class="modal__class" id="modal-class"></p>
+          <h3 id="modal-title">網站預覽</h3>
+          <p class="modal__site" id="modal-site"></p>
+        </div>
+        <button type="button" class="modal__close" data-close-modal aria-label="關閉">×</button>
+      </div>
+      <div class="modal__frame-wrap">
+        <iframe id="modal-frame" title="網站預覽" src="" allowfullscreen allow="fullscreen"></iframe>
+      </div>
+      <div class="modal__note">
+        <p id="modal-note">請用下方連結另開分頁。若出現登入畫面，請先登入學校帳號，或請學生把發布範圍改成「知道連結的任何人都可以檢視」。</p>
+        <a id="modal-open" href="#" target="_blank" rel="noopener noreferrer">在新分頁開啟網站</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
