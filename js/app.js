@@ -20,11 +20,6 @@ function getSiteUrl(student) {
   return String(student && student.siteUrl || '').trim();
 }
 
-function hasSite(student) {
-  const url = getSiteUrl(student);
-  return Boolean(url) && url !== '#';
-}
-
 function sourceLabel(url) {
   if (/sites\.google\.com/i.test(url)) return 'Google 網站';
   if (url) return '網站';
@@ -112,10 +107,14 @@ function renderCards() {
 
   list.forEach((student) => {
     const url = publishedSiteUrl(getSiteUrl(student));
-    const ready = hasSite(student);
-    const card = document.createElement(ready ? 'button' : 'div');
-    if (ready) card.type = 'button';
+    const ready = Boolean(url);
+    const card = document.createElement(ready ? 'a' : 'div');
     card.className = 'student-card' + (ready ? '' : ' is-empty');
+    if (ready) {
+      card.href = url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+    }
     card.setAttribute('aria-label', ready
       ? `${student.name}，${student.class} 班，開啟 Google 網站`
       : `${student.name}，${student.class} 班，尚未提供網站連結`);
@@ -151,10 +150,6 @@ function renderCards() {
       img.src = localThumb;
       img.addEventListener('error', () => img.remove());
       card.querySelector('.student-thumb').appendChild(img);
-    }
-
-    if (ready) {
-      card.addEventListener('click', () => window.openPreview(student));
     }
 
     grid.appendChild(card);
@@ -198,55 +193,9 @@ function classFromHash() {
   return match ? match[1].toUpperCase() : 'all';
 }
 
-function initModal() {
-  const modal = document.getElementById('preview-modal');
-  const frame = document.getElementById('modal-frame');
-  const title = document.getElementById('modal-title');
-  const classEl = document.getElementById('modal-class');
-  const siteEl = document.getElementById('modal-site');
-  const openLink = document.getElementById('modal-open');
-  if (!modal) return;
-
-  const close = () => {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-    const wrap = document.querySelector('.modal__frame-wrap');
-    if (wrap) wrap.hidden = false;
-    if (frame) frame.removeAttribute('src');
-  };
-
-  modal.querySelectorAll('[data-close-modal]').forEach((el) => {
-    el.addEventListener('click', close);
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal.hidden) close();
-  });
-
-  function openPreview(student) {
-    const url = publishedSiteUrl(getSiteUrl(student));
-    if (!url) return;
-    const wrap = document.querySelector('.modal__frame-wrap');
-    const embedBlocked = /sites\.google\.com/i.test(url);
-    title.textContent = student.name;
-    classEl.textContent = `${student.class} 班 · ${sourceLabel(url)}`;
-    siteEl.textContent = student.siteTitle || '';
-    openLink.href = url;
-    if (wrap) wrap.hidden = embedBlocked;
-    if (frame) {
-      if (embedBlocked) frame.removeAttribute('src');
-      else frame.src = url;
-    }
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
-  }
-
-  window.openPreview = openPreview;
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   initTabs();
   initSearch();
-  initModal();
   state.students = await loadStudents();
   setClassFilter(classFromHash(), false);
   window.addEventListener('hashchange', () => setClassFilter(classFromHash(), false));
